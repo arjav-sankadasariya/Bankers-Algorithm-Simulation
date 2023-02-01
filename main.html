@@ -1,0 +1,281 @@
+<html>
+    <head>
+        <title>
+            Bankers Algorithm - 20BCE015
+        </title>
+        <script rel="text/javascript" src="script.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    
+<body>
+    <h1>Banker's Algorithm</h1>
+    <div id="top">
+        <div id="contol">
+            <button name="sam" onclick="sample()">Sample Example</button>&nbsp;&nbsp;&nbsp;
+            <button name="avai" onclick="avail()">Find available</button>&nbsp;&nbsp;&nbsp;
+            <button name="need" onclick="need()">Calculate Need</button>&nbsp;&nbsp;&nbsp;
+            <button name="seq" onclick="sequence()">Find Sequence</button>&nbsp;&nbsp;&nbsp;
+            <button name="reset" onclick="reset()">Reset</button>
+        </div>
+        <div id="lab">
+            <label style="margin-top:10px; font-weight:bold;">Resources : No. of Instance &nbsp;&nbsp;&nbsp;</label>
+            <input type="text" id="reso-a" class="in-data" placeholder="A">
+            <input type="text" id="reso-b" class="in-data" placeholder="B">
+            <input type="text" id="reso-c" class="in-data" placeholder="C">
+        </div>
+        
+    </div>
+    <div class="alltables">
+      <div class="table">
+        <table id="allocation">
+          <tr>
+            <th colspan="4">CURRENT ALLOCATION</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td><b>A</b></td>
+            <td><b>B</b></td>
+            <td><b>C</b></td>
+          </tr>
+          <tr>
+            <td><b>P1</b></td>
+            <td><input id="a11" size="2" maxlength="2"></td>
+            <td><input id="a12" size="2" maxlength="2"></td>
+            <td><input id="a13" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P2</b></td>
+            <td><input id="a21" size="2" maxlength="2"></td>
+            <td><input id="a22" size="2" maxlength="2"></td>
+            <td><input id="a23" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P3</b></td>
+            <td><input id="a31" size="2" maxlength="2"></td>
+            <td><input id="a32" size="2" maxlength="2"></td>
+            <td><input id="a33" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P4</b></td>
+            <td><input id="a41" size="2" maxlength="2"></td>
+            <td><input id="a42" size="2" maxlength="2"></td>
+            <td><input id="a43" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P5</b></td>
+            <td><input id="a51" size="2" maxlength="2"></td>
+            <td><input id="a52" size="2" maxlength="2"></td>
+            <td><input id="a53" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td style="padding: 0px; background-color: #4285F4;"><button onclick="tot()" style="margin:0px;padding:3px;">Total</button></td>
+            <td><input id="s1" size="2" maxlength="2"></td>
+            <td><input id="s2" size="2" maxlength="2"></td>
+            <td><input id="s3" size="2" maxlength="2"></td>
+          </tr>
+        </table>
+        <p id="avai"></p>
+      </div>
+      <div class="table">
+        <table id="max">
+          <tr>
+            <th colspan="4">MAX</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td><b>A</b></td>
+            <td><b>B</b></td>
+            <td><b>C</b></td>
+          </tr>
+          <tr>
+            <td><b>P1</b></td>
+            <td><input id="m11" size="2" maxlength="2"></td>
+            <td><input id="m12" size="2" maxlength="2"></td>
+            <td><input id="m13" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P2</b></td>
+            <td><input id="m21" size="2" maxlength="2"></td>
+            <td><input id="m22" size="2" maxlength="2"></td>
+            <td><input id="m23" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P3</b></td>
+            <td><input id="m31" size="2" maxlength="2"></td>
+            <td><input id="m32" size="2" maxlength="2"></td>
+            <td><input id="m33" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P4</b></td>
+            <td><input id="m41" size="2" maxlength="2"></td>
+            <td><input id="m42" size="2" maxlength="2"></td>
+            <td><input id="m43" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P5</b></td>
+            <td><input id="m51" size="2" maxlength="2"></td>
+            <td><input id="m52" size="2" maxlength="2"></td>
+            <td><input id="m53" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+        </table>
+      </div>
+      <div class="table">
+        <table id="available">
+          <tr>
+            <th colspan="4">AVALIABLE</th>
+          </tr>
+          <tr>
+            <td><b>A</b></td>
+            <td><b>B</b></td>
+            <td><b>C</b></td>
+          </tr>
+          <tr>
+            <td><input id="av1" size="2" maxlength="2"></td>
+            <td><input id="av2" size="2" maxlength="2"></td>
+            <td><input id="av3" size="2" maxlength="2"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="table">
+        <table id="need" >
+          <tr>
+            <th colspan="4">NEED</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td><b>A</b></td>
+            <td><b>B</b></td>
+            <td><b>C</b></td>
+          </tr>
+          <tr>
+            <td><b>P1</b></td>
+            <td><input id="n11" size="2" maxlength="2"></td>
+            <td><input id="n12" size="2" maxlength="2"></td>
+            <td><input id="n13" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P2</b></td>
+            <td><input id="n21" size="2" maxlength="2"></td>
+            <td><input id="n22" size="2" maxlength="2"></td>
+            <td><input id="n23" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P3</b></td>
+            <td><input id="n31" size="2" maxlength="2"></td>
+            <td><input id="n32" size="2" maxlength="2"></td>
+            <td><input id="n33" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P4</b></td>
+            <td><input id="n41" size="2" maxlength="2"></td>
+            <td><input id="n42" size="2" maxlength="2"></td>
+            <td><input id="n43" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b>P5</b></td>
+            <td><input id="n51" size="2" maxlength="2"></td>
+            <td><input id="n52" size="2" maxlength="2"></td>
+            <td><input id="n53" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+          </tr>
+          
+        </table>
+      </div>
+      <div class="table">
+        <table id="need" >
+          <tr>
+            <th colspan="4">CURRENT AVAILABLE</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td><b>A</b></td>
+            <td><b>B</b></td>
+            <td><b>C</b></td>
+          </tr>
+          <tr>
+            <td><b id="c1"></b></td>
+            <td><input id="c11" size="2" maxlength="2"></td>
+            <td><input id="c12" size="2" maxlength="2"></td>
+            <td><input id="c13" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b id="c2"></b></td>
+            <td><input id="c21" size="2" maxlength="2"></td>
+            <td><input id="c22" size="2" maxlength="2"></td>
+            <td><input id="c23" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b id="c3"></b></td>
+            <td><input id="c31" size="2" maxlength="2"></td>
+            <td><input id="c32" size="2" maxlength="2"></td>
+            <td><input id="c33" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b id="c4"></b></td>
+            <td><input id="c41" size="2" maxlength="2"></td>
+            <td><input id="c42" size="2" maxlength="2"></td>
+            <td><input id="c43" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+            <td><b id="c5"></b></td>
+            <td><input id="c51" size="2" maxlength="2"></td>
+            <td><input id="c52" size="2" maxlength="2"></td>
+            <td><input id="c53" size="2" maxlength="2"></td>
+          </tr>
+          <tr>
+              <td><b>Total</b></td>
+              <td><input id="cf1" size="2" maxlength="2"></td>
+              <td><input id="cf2" size="2" maxlength="2"></td>
+              <td><input id="cf3" size="2" maxlength="2"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="ch-out"  placeholder="Dialogue box">
+    <p id="ch">Dialogue Box</p>
+    <div id="seq">
+      <lable>Safe Sequence : </lable>
+      <input id="p1" class="ss-label"size="2" maxlength="2">&nbsp;->&nbsp;
+      <input id="p2" class="ss-label" size="2" maxlength="2">&nbsp;->&nbsp;
+      <input id="p3" class="ss-label" size="2" maxlength="2">&nbsp;->&nbsp;
+      <input id="p4" class="ss-label" size="2" maxlength="2">&nbsp;->&nbsp;
+      <input id="p5" class="ss-label" size="2" maxlength="2">
+    </div>
+    </div>
+    <h1 style="margin: auto;margin-top: 10px;">Resources Request</h1>
+    <div id="dialog">
+      <div>
+        <p id="dai"></p>
+      </div>
+  </div>
+    <div class="resoreq">
+      <lable style="margin-top:10px; font-weight:bold;">Select Process : <b id="pro"></b>&nbsp;&nbsp;&nbsp;</lable>
+      <button onclick="selectprocess('1')">P1</button>
+      <button onclick="selectprocess('2')">P2</button>
+      <button onclick="selectprocess('3')">P3</button>
+      <button onclick="selectprocess('4')">P4</button>
+      <button onclick="selectprocess('5')">P5</button>
+    </div>
+    <div class="resoreq" >
+    <lable style="margin-top:10px; font-weight:bold;">Request resources :&nbsp;&nbsp;&nbsp;</lable>
+    <input type="text" id="req-a" class="in-data" placeholder="A">
+    <input type="text" id="req-b" class="in-data" placeholder="B">
+    <input type="text" id="req-c" class="in-data" placeholder="C">
+    </div>
+    <div class="resoreq">
+      <button onclick="check_request()" >Check!</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+   
+</body>
+</html>
